@@ -9,8 +9,7 @@ import 'dotenv/config';
 
 const app = express();
 const port = process.env.PORT || 3001;
-
-const uri = "mongodb+srv://danieldeveloper:g16laqyjwRIUEdZC@clusterforuser.fdrcpjr.mongodb.net/?retryWrites=true&w=majority";
+const uri = process.env.DB_CONN
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
