@@ -4,9 +4,11 @@ import bodyParser from "body-parser";
 import axios from "axios";
 import ejs from "ejs";
 import mongoose from "mongoose";
+import 'dotenv/config';
+
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3001;
 
 const uri = "mongodb+srv://danieldeveloper:g16laqyjwRIUEdZC@clusterforuser.fdrcpjr.mongodb.net/?retryWrites=true&w=majority";
 
@@ -14,7 +16,7 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// mongoose.connect(uri,  {useNewUrlParser: true}).then(() => console.log('Connected!'))
+mongoose.connect(uri,  {useNewUrlParser: true}).then(() => console.log('Connected!'))
 
 const userSchema = {
     email: String,
@@ -58,38 +60,50 @@ app.get("/register", async (req, res) => {
 })
 
 
-
 app.post("/register", async (req, res) => {
 
-    try {
-
-
-        const email = req.body.username
-        const password = req.body.password
-
+        // const email = req.body.username
+        // const password = req.body.password
 
         const newUser = new UserDB({
             email: req.body.username,
             password: req.body.password
         });
 
-        newUser.save(function(err){
-            if (err) {
-                console.log(err);
-            } else {
-                res.render("secrets");
-            }
+        newUser.save().then(res.status(201).render("secrets")) 
+        .catch((err) => {
+            res.status(500).send({message: `${err.message} - falha ao cadastrar.`})
         })
+    })
 
+// app.post("/login", function(req, res){
 
-        res.render('home')
-    } catch (error) {
-        res.send(error.message)
-    }
+//     const userNameLogin = req.body.email;
+//     const userPasswordLogin = req.body.password;
+//     UserDB.findOne({email: userNameLogin}, checkFunction)
 
-    
-})
-    
+//     function checkFunction(error, foundUser){
+//         if(err){
+//             console.log(err);
+//         } else {
+//             if ()
+//         }
+//     }
+
+// })
+        // function(err){
+        //     if (err) {
+        //         console.log(err);
+        //     } else {
+        //         res.render("secrets");
+        //     }
+        // })
+
+    // } catch (error) {
+    //     res.send("catchError" + error.message)
+    // }
+// })
+
 
 
 
