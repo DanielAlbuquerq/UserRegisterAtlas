@@ -17,15 +17,33 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-async function conectionDB() {
-  await mongoose
-  .connect(uri, { 
-    serverSelectionTimeoutMS: 20000,
-    useNewUrlParser: true })
-  .then(() => console.log("Connected!")).catch((err) => {console.log(err.reason)})
+try {
+  mongoose.connect(uri).then(console.log("connected"));
+} catch (error) {
+  console.log(error)
 }
-conectionDB()
+
+// setTimeout( function() {
+//   mongoose.connect(uri);
+// }, 60000);
+
+// Will just hang until mongoose successfully connects
+
+// try {
+//   await mongoose.connect(uri,{useNewUrlParser: true
+//   })
+// } catch (error) {
+//   handleError(error);
+// }
+
+// async function conectionDB() {
+//   await mongoose
+//   .connect(uri, { 
+//     serverSelectionTimeoutMS: 20000,
+//     useNewUrlParser: true })
+//   .then(() => console.log("Connected!")).catch((err) => {console.log(err.reason)})
+// }
+// conectionDB()
 
 
 const userSchema = {
