@@ -74,36 +74,36 @@ app.post("/register", async (req, res) => {
 });
 
 
-app.post("/login", async (req, res) => {
-    //Mongoose dropped callback now you need to use try/catch
+// app.post("/login", async (req, res) => {
+//     //Mongoose dropped callback now you need to use try/catch
 
-  try {
+//   try {
 
-    //Getting Data from form input in login.ejs
-    const userNameLogin = req.body.username
-    const userPasswordLogin = req.body.password
+//     //Getting Data from form input in login.ejs
+//     const userNameLogin = req.body.username
+//     const userPasswordLogin = req.body.password
 
-    //MongoDB findOne() method returns only one document that satisfies the criteria entered when no document is found it returns a null.
-    const dbData = await userDB.findOne({email: userNameLogin})
-    console.log(dbData)
+//     //MongoDB findOne() method returns only one document that satisfies the criteria entered when no document is found it returns a null.
+//     const dbData = await userDB.findOne({email: userNameLogin})
+//     console.log(dbData)
 
-    if (dbData) {
+//     if (dbData) {
 
-    //comparing Data in database with form input data in login.ejs
-      if (dbData.password === userPasswordLogin) {
-        res.render("secrets");
-      } 
+//     //comparing Data in database with form input data in login.ejs
+//       if (dbData.password === userPasswordLogin) {
+//         res.render("secrets");
+//       } 
 
-      else {
-        res.send("ErrorPassword");
-        console.log("Error");
-      }
+//       else {
+//         res.send("ErrorPassword");
+//         console.log("Error");
+//       }
 
-    }}
-    catch (err) {
-    res.send("No data found " + err);
-  }
-});
+//     }}
+//     catch (err) {
+//     res.send("No data found " + err);
+//   }
+// });
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
