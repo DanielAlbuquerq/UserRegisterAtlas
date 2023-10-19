@@ -7,8 +7,10 @@ import mongoose from "mongoose";
 import "dotenv/config";
 
 const app = express();
+
 const port = process.env.PORT || 3001;
-const uri = process.env.DB_CONN;
+const uri = "mongodb+srv://danieldeveloper:g16laqyjwRIUEdZC@clusterforuser.fdrcpjr.mongodb.net/?retryWrites=true&w=majority"
+ 
 
 
 app.use(express.static("public"));
