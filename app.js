@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 async function conectionDB() {
   await mongoose
   .connect(uri, { 
-    serverSelectionTimeoutMS: 5000,
+    serverSelectionTimeoutMS: 20000,
     useNewUrlParser: true })
   .then(() => console.log("Connected!")).catch((err) => {console.log(err.reason)})
 }
